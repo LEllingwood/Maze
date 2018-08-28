@@ -1,9 +1,30 @@
-/* #gameboard {
-    display: flex;
-    margin: auto;
-} */
 
-.rows {
-    display: flex;
+.row {
+    margin: 0;
+    padding: 0;
+    height: 20px;
+}
+
+.cell {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin: 0;
+    padding: 0;
+}
+
+.wall {
+    background-color:black;
+}
+
+.start {
+    background-color:green;
     
+} 
+.finish {
+    background-color: red;
+}
+
+.player {
+    background-color: blueviolet;
 }
