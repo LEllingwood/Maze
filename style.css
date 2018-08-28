@@ -1,0 +1,9 @@
+#gameboard {
+    display: flex;
+    margin: auto;
+}
+
+.rows {
+    display: flex;
+    
+}
