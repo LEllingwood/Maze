@@ -1,26 +1,23 @@
 const map = [
     "█████████████████████",
-    "█   █     █     █ █ █",
-    "█ █ █ ███ █████ █ █ █",
-    "█ █ █   █     █ █   █",
-    "█ ███████ █ ███ █ █ █",
-    "█         █     █ █ █",
-    "█ ███ █████ █████ █ █",
-    "█ █   █   █ █     █ █",
-    "█ █████ █ █ █ ███ █ F",
-    "S     █ █ █ █ █ █ ███",
-    "█████ █ █ █ █ █ █ █ █",
-    "█     █ █ █   █ █ █ █",
-    "█ ███████ █████ █ █ █",
-    "█       █       █   █",
+    "█░░░█░░░░░█░░░░░█░█░█",
+    "█░█░█░███░█████░█░█░█",
+    "█░█░█░░░█░░░░░█░█░░░█",
+    "█░███████░█░███░█░█░█",
+    "█░░░░░░░░░█░░░░░█░█░█",
+    "█░███░█████░█████░█░█",
+    "█░█░░░█░░░█░█░░░░░█░█",
+    "█░█████░█░█░█░███░█░F",
+    "S░░░░░█░█░█░█░█░█░███",
+    "█████░█░█░█░█░█░█░█░█",
+    "█░░░░░█░█░█░░░█░█░█░█",
+    "█░███████░█████░█░█░█",
+    "█░░░░░░░█░░░░░░░█░░░█",
     "█████████████████████"
 ];
-
-
 const wall = "█";
-const space = " ";
+const space = ░;
 let currentPlayer = "O"
-
 
 // let boxTop = 200;
 // let boxLeft = 200;
@@ -44,7 +41,13 @@ let currentPlayer = "O"
 //     document.getElementById("box").style.top = boxTop + "px";
 // //     document.getElementById("box").style.left = boxLeft + "px";
 
+
+
 function showGameBoard() {
+    for (let i = 0; i < map.length; i++) {
+        
+    }
+
     const board = document.createTextNode(map[0]);
     const newP = document.createElement("div");
     const destination = document.getElementById("row1");
