@@ -17,7 +17,10 @@ const map = [
 ];
 const gameboard = document.getElementById("gameboard");
 const playerElement = createPlayer();
-const playerPosition = {row: 9, column: 0}
+const playerPosition = {
+    row: 9,
+    column: 0
+}
 
 for (let rowIndex = 0; rowIndex < map.length; rowIndex++) {
     const rowString = map[rowIndex];
@@ -30,6 +33,9 @@ for (let rowIndex = 0; rowIndex < map.length; rowIndex++) {
 
         if (cellElement.dataset.type === "start") {
             movePlayerToCellElement(cellElement)
+            // if (cellElement.dataset.type === "finish") {
+            //     alert("You Win") *can't use console.log or alert to indicate a win
+            // }
         }
         rowDiv.appendChild(cellElement)
     }
@@ -72,6 +78,7 @@ function createCellElement(cellCharacter, rowIndex, cellIndex) {
 // switch case is basically a big if else statement
 
 function movePlayerToCellElement(cellElement) {
+    // added the above line to try to stop the chip from moving where the dataset.type = "wall"
     cellElement.appendChild(playerElement)
 }
 
@@ -81,8 +88,8 @@ function findCellByCoordinates(rowIndex, cellIndex) {
     const cellIndexSelector = "[data-cell-index='" + cellIndex + "']"
     const cellSelector = "#gameboard .row " + rowIndexSelector + cellIndexSelector
     return document.querySelector(cellSelector)
-// this function will search the DOM for a cell that meets both the row and cell types
-// findCellByCoordinates(rowIndex, cellIndex + 1)-this is how you would check the cell to the right
+    // this function will search the DOM for a cell that meets both the row and cell types
+    // findCellByCoordinates(rowIndex, cellIndex + 1)-this is how you would check the cell to the right
 }
 
 
@@ -92,35 +99,46 @@ document.addEventListener('keydown', (event) => {
     let rowIndex = playerPosition.row
     let cellIndex = playerPosition.column
     if (keyName === "ArrowDown") {
-        console.log("hello")
         let newCellNode = findCellByCoordinates(rowIndex + 1, cellIndex)
-        movePlayerToCellElement(newCellNode)
-        playerPosition.row +=1
+        if (newCellNode.dataset.type !== "wall"){
+            movePlayerToCellElement(newCellNode)
+            playerPosition.row += 1
+        }
     }
     if (keyName === "ArrowUp") {
         let newCellNode = findCellByCoordinates(rowIndex - 1, cellIndex)
-        movePlayerToCellElement(newCellNode)
-        playerPosition.row -=1
+        if (newCellNode.dataset.type !== "wall"){
+            movePlayerToCellElement(newCellNode)
+            playerPosition.row -= 1
+        }
     }
     if (keyName === "ArrowLeft") {
         let newCellNode = findCellByCoordinates(rowIndex, cellIndex - 1)
-        movePlayerToCellElement(newCellNode)
-        playerPosition.column -=1
+           if (newCellNode.dataset.type !== "wall"){
+            movePlayerToCellElement(newCellNode)
+            playerPosition.column -= 1
+        }
     }
+
     if (keyName === "ArrowRight") {
         let newCellNode = findCellByCoordinates(rowIndex, cellIndex + 1)
-        movePlayerToCellElement(newCellNode)
-        playerPosition.column +=1
+        if (newCellNode.dataset.type !== "wall" && newCellNode.dataset.type === "finish"){
+            addWinMessage()
+        }
+            else {
+            if (newCellNode.dataset.type !== "wall"){
+             movePlayerToCellElement(newCellNode)
+             playerPosition.column += 1
+            }
+        }
+
     }
-    
-    
 })
 
-// function wallGuard(){
-//     if (cellElement.dataset.type === "wall") {
-//         alert("YOU SHALL NOT PASS!")
-//     }
-// } 
-// wallGuard()
-// code win message once player reaches position ___
-// can remove event listener once you reach finish so you can't move anymore
+function addWinMessage() {
+        const message = document.createTextNode("You win!");
+        const newP = document.createElement("p");
+        const destination = document.getElementById("winMessage");
+        newP.appendChild(message);
+        destination.appendChild(newP);
+    }
